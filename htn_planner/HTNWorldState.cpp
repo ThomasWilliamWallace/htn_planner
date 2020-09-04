@@ -141,7 +141,7 @@ void HTNWorldState::Print()
 		if (p != nullptr)
 			ss << "PlayerData " << p->m_playerName << " is also in the " << LocationToString(m_location) << ".\n";
 		else
-            throw "ERROR NULL PLAYERDATA VALUE\n";
+            ThrowException("ERROR NULL PLAYERDATA VALUE");
     }
     ss << "]\n";
     ss << "m_missionClass:" << m_missionClass->MissionName() << "\n";

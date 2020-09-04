@@ -63,3 +63,24 @@ AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations locatio
 {
     return std::make_shared<AbstractItem>(itemType, location, carryingPlayer);
 }
+
+#ifdef TEXT_ONLY_HTN
+// Default case
+
+[[noreturn]] void ThrowException(const std::string& errorMessage)
+{    
+    throw errorMessage;
+}
+
+#else
+// Unreal engine case
+
+    // TODO split the platform specific code into separate cpp files. The PlatformSpecific.cpp file can then be included from the appropriate location for different builds.
+    // The TEXT_ONLY_HTN flag can then be done away with.
+
+[[noreturn]] void ThrowException(const std::string& errorMessage)
+{    
+    UE_LOG(Fatal, TEXT(errorMessage.c_str()));
+}
+
+#endif

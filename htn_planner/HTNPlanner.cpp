@@ -16,19 +16,19 @@ HTNPrimitive::HTNPrimitive(std::string name): HTNNode(name, HTNType::Primitive) 
 
 bool HTNPrimitive::Preconditions(HTNWorldState &htnWorldState)
 {
-    throw "HTNPrimitive::Preconditions not defined";
+    ThrowException("HTNPrimitive::Preconditions not defined");
     return true;
 }
 
 void HTNPrimitive::Effect(HTNWorldState &htnWorldState)
 {
-    throw "HTNPrimitive::Effect not defined";
+    ThrowException("HTNPrimitive::Effect not defined");
     return;
 }
 
 std::shared_ptr<BaseAction> HTNPrimitive::Operate(AbstractPlayerData* playerData)
 {
-    throw "HTNPrimitive::Operate not defined";
+    ThrowException("HTNPrimitive::Operate not defined");
     return std::make_shared<BaseAction>(Actions::noAction);
 }
 
@@ -60,7 +60,7 @@ HTNMethod::HTNMethod(std::string name): HTNNode(name, HTNType::Method), m_alread
 
 bool HTNMethod::Preconditions(HTNWorldState &htnWorldState)
 {
-    throw "HTNMethod::Preconditions not defined";
+    ThrowException("HTNMethod::Preconditions not defined");
     return true; //Note: Preconditions should always use the Preconditions htnWorldState parameter, rather than the constructor m_htnWorldState parameter.
 }
 

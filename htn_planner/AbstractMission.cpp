@@ -19,7 +19,7 @@ std::string AbstractMission::MissionName()
         case (Missions::noMission):
             return "no mission";
     }
-    throw "UnrecognisedMission";
+    ThrowException("UnrecognisedMission");
 }
 
 std::string AbstractMission::MissionNarrative()
@@ -37,7 +37,7 @@ std::string AbstractMission::MissionNarrative()
         case Missions::bringItemToRoom:
             return "Mission: " + m_owner->m_playerName + " must bring a " + ItemTypeToString(m_itemType) + " to the " + m_locationClass.ToString() + ".";
     }
-    throw "ERROR: MISSION TYPE NOT RECOGNISED";
+    ThrowException("ERROR: MISSION TYPE NOT RECOGNISED");
 }
 
 Missions GetRandomMission()
@@ -133,7 +133,7 @@ AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr)
             m_locationClass = GetRandomLocation();
             return;
 	default:
-	    throw std::invalid_argument("Selected an invalid mission type.");
+	    ThrowException("Selected an invalid mission type.");
     }
     m_objective += 3; //todo ensure that the mission is achievable, ie 100 or below
 }

@@ -17,6 +17,8 @@ typedef std::shared_ptr<HTNNode> HTNNodePtr;
 typedef std::shared_ptr<HTNMethod> HTNMethodPtr;
 typedef std::shared_ptr<StackNode> StackNodePtr;
 
+#ifdef TEXT_ONLY_HTN
+
 #include <map>
 
 typedef std::shared_ptr<AbstractItem> AbstractItemPtr;
@@ -71,6 +73,61 @@ void RemoveCurrent(Container &container, Iterator iter)
 	iter = container.erase(iter);
 };
 
+#else
+
+#include "Runtime/Core/Public/Containers/Map.h"
+
+typedef TSharedPtr<SimActorItem> SimActorItemPtr;
+
+typedef TMap<int, UPlayerData*> PlayerMap;
+typedef TPair<int, UPlayerData*> IntPlayerPair;
+typedef TMap<int, URelationship*> RelMap;
+typedef TPair<int, URelationship*> IntRelPair;
+
+template <typename Iterator>
+int GetKey(Iterator &iterator)
+{
+	return iterator.Key;
+};
+
+template <typename Iterator>
+UPlayerData* GetPlayer(Iterator &iterator)
+{
+	return iterator.Value;
+};
+
+template <typename Iterator>
+URelationship* GetRel(Iterator &iterator)
+{
+	return iterator.second;
+};
+
+template <typename Container>
+bool Contains(Container &container, int key)
+{
+	return container.Contains(key);
+};
+
+template <typename Container, typename Element>
+void Add(Container &container, int addKey, Element addElem)
+{
+	container.Add(addKey, addElem);
+};
+
+template <typename Container>
+void Remove(Container &container, int removeKey)
+{
+	container.Remove(removeKey);
+};
+
+template <typename Container, typename Iterator>
+void RemoveCurrent(Container &container, Iterator iter)
+{
+	iter.RemoveCurrent();
+};
+
+#endif
+
 enum class EItemType : uint8;
 enum class ELocations : uint8;
 
@@ -89,3 +146,5 @@ StackNodePtr MakeSharedStackNodePtr(HTNNodePtr htnNodePtr, bool isOr);
 HTNNodePtr MakeShareableCompound(HTNCompound &htnCompound);
 AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer);
 
+// Encapsulated because Unreal Engine uses a different exception system
+[[noreturn]] void ThrowException(const std::string& errorMessage);

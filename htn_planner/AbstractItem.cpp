@@ -57,7 +57,7 @@ std::string ItemTypeToString(EItemType itemType)
 	case EItemType::syringe:
 		return "Syringe";
 	}
-	throw "ERROR: NO ITEM NAME";
+	ThrowException("ERROR: NO ITEM NAME");
 }
 
 EItemType GetRandomItemType()

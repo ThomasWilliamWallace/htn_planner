@@ -38,9 +38,9 @@ std::string ActionToString(Actions action)
         case Actions::declineRequest:
             return "declineRequest";
         case Actions::noAction:
-            throw "ERROR NO ACTION";
+            ThrowException("ERROR NO ACTION");
     }
-    throw "ERROR UnrecognisedAction";
+    ThrowException("ERROR UnrecognisedAction");
 }
 
 std::string BaseAction::ToString() {
