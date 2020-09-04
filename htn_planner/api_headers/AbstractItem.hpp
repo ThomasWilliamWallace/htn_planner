@@ -52,14 +52,6 @@ public:
     std::string ToString();
 };
 
-// TODO currently the planning crashes because we don't distinguish between items in the HTN planning world simulation, and items in the 'real' text world.
-// The HTN planning then inteferes with the 'real' items, by changing the item m_owner attribute.
-// Solution: add a class which can represent the HTN world simulation items, SimItem. It has a pointer back to the real item it is based on.
-// An AbstractSimItem base class should be added here, so that HTNPrimitives.cpp can access it. 
-// But it needs to be extended in 'text' and 'unreal' code Item.hpp, to have it's pointer towards either 'text' items or 'unreal' actor items.
-
-// TODO CHECK THE GET() CALLS
-
 class SimItem : public AbstractItem
 {
 public:
