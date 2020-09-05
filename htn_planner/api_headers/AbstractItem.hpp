@@ -5,6 +5,7 @@
 
 class AbstractPlayerData;
 
+UENUM(BlueprintType, Blueprintable)
 enum class EItemType : uint8
 {
 	assaultRifle,
@@ -32,7 +33,8 @@ enum class EItemType : uint8
 	scissors,
 	screw,
 	sword,
-	syringe
+	syringe,
+    LAST = syringe
 };
 
 std::string ItemTypeToString(EItemType itemType);

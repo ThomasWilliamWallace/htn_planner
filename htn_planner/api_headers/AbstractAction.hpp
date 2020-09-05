@@ -6,7 +6,8 @@
 
 class AbstractMission;
 
-enum class Actions //MUST KEEP IN SYNC WITH V_ACTION
+UENUM(BlueprintType, Blueprintable)
+enum class Actions
 {
     attack,
     useRoom,
@@ -24,28 +25,8 @@ enum class Actions //MUST KEEP IN SYNC WITH V_ACTION
     requestItem,
     acceptRequest,
     declineRequest,
-    noAction // serves as a flag for any unset actions
-};
-
-const std::vector<Actions> v_action //MUST KEEP IN SYNC WITH ACTIONS
-{
-    Actions::attack,
-    Actions::useRoom,
-    Actions::goToLibrary,
-    Actions::goToGym,
-    Actions::goToCircuitTrack,
-    Actions::goToBedroom,
-    Actions::goToMainHall,
-    Actions::evade,
-    Actions::makeFriends,
-    Actions::offerMission,
-    Actions::pickUpItemByPtr,
-    Actions::pickUpItemByType,
-    Actions::dropItem,
-    Actions::requestItem,
-    Actions::acceptRequest,
-    Actions::declineRequest,
-    Actions::noAction,
+    noAction, // serves as a flag for any unset actions
+    LAST = noAction
 };
 
 std::string ActionToString(Actions action);

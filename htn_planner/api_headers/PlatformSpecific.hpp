@@ -19,6 +19,10 @@ typedef std::shared_ptr<StackNode> StackNodePtr;
 
 #ifdef TEXT_ONLY_HTN
 
+// Allow Unreal-specific macros to evaluate to nothing
+#define UENUM(...)
+#define UMETA(DisplayName, ...)
+
 #include <map>
 
 typedef std::shared_ptr<AbstractItem> AbstractItemPtr;

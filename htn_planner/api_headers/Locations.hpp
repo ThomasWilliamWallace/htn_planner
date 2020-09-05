@@ -3,13 +3,15 @@
 #include <iostream>
 #include "PlatformSpecific.hpp"
 
+UENUM(BlueprintType, Blueprintable)
 enum class ELocations : uint8
 {
     mainHall,
     gym,
     circuitTrack,
     library,
-    bedroom
+    bedroom,
+    LAST = bedroom
 };
 
 class LocationClass

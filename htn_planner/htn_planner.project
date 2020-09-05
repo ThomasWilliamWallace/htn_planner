@@ -8,7 +8,6 @@
   <VirtualDirectory Name="api_headers">
     <File Name="api_headers/PStats.hpp"/>
     <File Name="api_headers/pLog.hpp"/>
-    <File Name="api_headers/PlayerMap.hpp"/>
     <File Name="api_headers/PlatformSpecific.hpp"/>
     <File Name="api_headers/Locations.hpp"/>
     <File Name="api_headers/HTNWorldState.hpp"/>

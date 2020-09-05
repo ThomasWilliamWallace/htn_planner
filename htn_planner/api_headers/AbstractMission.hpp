@@ -2,16 +2,19 @@
 
 #include <iostream>
 #include "AbstractItem.hpp"
+#include "PlatformSpecific.hpp"
 
 class AbstractPlayerData;
 
+UENUM(BlueprintType, Blueprintable)
 enum class Missions
 {
     noMission,
     increaseStrength,
     increaseAgility,
     increaseIntelligence,
-    bringItemToRoom
+    bringItemToRoom,
+    LAST = bringItemToRoom
 };
 
 //https://stackoverflow.com/questions/7010827/named-constructor-idiom-and-new-operator

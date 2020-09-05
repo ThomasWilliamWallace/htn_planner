@@ -5,7 +5,6 @@
 #include "Locations.hpp"
 #include "Constants.hpp"
 #include "PlatformSpecific.hpp"
-#include "PlayerMap.hpp"
 #include "AbstractMission.hpp"
 #include "AbstractItem.hpp"
 #include "AbstractPlayerData.hpp"
