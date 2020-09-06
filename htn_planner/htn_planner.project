@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="htn_planner" Version="10.0.0" InternalType="Library">
+  <VirtualDirectory Name="Public">
+    <File Name="Public/PStats.h"/>
+    <File Name="Public/pLog.h"/>
+    <File Name="Public/PlatformSpecific.h"/>
+    <File Name="Public/Locations.h"/>
+    <File Name="Public/HTNWorldState.h"/>
+    <File Name="Public/HTNPlanner.h"/>
+    <File Name="Public/Constants.h"/>
+    <File Name="Public/AbstractPlayerData.h"/>
+    <File Name="Public/AbstractMission.h"/>
+    <File Name="Public/AbstractItem.h"/>
+    <File Name="Public/AbstractAction.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Private">
+    <File Name="Private/PStats.cpp"/>
+    <File Name="Private/pLog.cpp"/>
+    <File Name="Private/PlatformSpecific.cpp"/>
+    <File Name="Private/Locations.cpp"/>
+    <File Name="Private/HTNWorldState.cpp"/>
+    <File Name="Private/HTNPlanner.cpp"/>
+    <File Name="Private/Constants.cpp"/>
+    <File Name="Private/AbstractPlayerData.cpp"/>
+    <File Name="Private/AbstractMission.cpp"/>
+    <File Name="Private/AbstractItem.cpp"/>
+    <File Name="Private/AbstractAction.cpp"/>
+  </VirtualDirectory>
   <Plugins>
     <Plugin Name="qmake">
       <![CDATA[00010001N0005Debug000000000000]]>
     </Plugin>
   </Plugins>
-  <VirtualDirectory Name="api_headers">
-    <File Name="api_headers/PStats.h"/>
-    <File Name="api_headers/pLog.h"/>
-    <File Name="api_headers/PlatformSpecific.h"/>
-    <File Name="api_headers/Locations.h"/>
-    <File Name="api_headers/HTNWorldState.h"/>
-    <File Name="api_headers/HTNPlanner.h"/>
-    <File Name="api_headers/Constants.h"/>
-    <File Name="api_headers/AbstractPlayerData.h"/>
-    <File Name="api_headers/AbstractMission.h"/>
-    <File Name="api_headers/AbstractItem.h"/>
-    <File Name="api_headers/AbstractAction.h"/>
-  </VirtualDirectory>
   <Description/>
   <Dependencies/>
-  <VirtualDirectory Name="src">
-    <File Name="PStats.cpp"/>
-    <File Name="pLog.cpp"/>
-    <File Name="PlatformSpecific.cpp"/>
-    <File Name="Locations.cpp"/>
-    <File Name="HTNWorldState.cpp"/>
-    <File Name="HTNPlanner.cpp"/>
-    <File Name="Constants.cpp"/>
-    <File Name="AbstractPlayerData.cpp"/>
-    <File Name="AbstractMission.cpp"/>
-    <File Name="AbstractItem.cpp"/>
-    <File Name="AbstractAction.cpp"/>
-  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -46,7 +48,7 @@
     <Configuration Name="Debug" CompilerType="MinGW ( TDM-GCC-64 )" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-std=c++17;-Wall;-D TEXT_ONLY_HTN" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
-        <IncludePath Value="./api_headers"/>
+        <IncludePath Value="./Public"/>
       </Compiler>
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
@@ -123,6 +125,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>
