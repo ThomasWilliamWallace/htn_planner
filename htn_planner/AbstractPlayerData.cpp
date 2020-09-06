@@ -1,8 +1,8 @@
-#include "AbstractPlayerData.hpp"
-#include "Locations.hpp"
+#include "AbstractPlayerData.h"
+#include "Locations.h"
 #include <sstream>
-#include "pLog.hpp"
-#include "Constants.hpp"
+#include "pLog.h"
+#include "Constants.h"
 
 std::string CharacterName(AbstractPlayerData* playerPtr)
 {

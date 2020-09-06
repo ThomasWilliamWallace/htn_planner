@@ -1,5 +1,5 @@
-#include "HTNPlanner.hpp"
-#include "pLog.hpp"
+#include "HTNPlanner.h"
+#include "pLog.h"
 #include <sstream>
 #include <stack>
 

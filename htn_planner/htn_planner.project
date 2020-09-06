@@ -6,17 +6,17 @@
     </Plugin>
   </Plugins>
   <VirtualDirectory Name="api_headers">
-    <File Name="api_headers/PStats.hpp"/>
-    <File Name="api_headers/pLog.hpp"/>
-    <File Name="api_headers/PlatformSpecific.hpp"/>
-    <File Name="api_headers/Locations.hpp"/>
-    <File Name="api_headers/HTNWorldState.hpp"/>
-    <File Name="api_headers/HTNPlanner.hpp"/>
-    <File Name="api_headers/Constants.hpp"/>
-    <File Name="api_headers/AbstractPlayerData.hpp"/>
-    <File Name="api_headers/AbstractMission.hpp"/>
-    <File Name="api_headers/AbstractItem.hpp"/>
-    <File Name="api_headers/AbstractAction.hpp"/>
+    <File Name="api_headers/PStats.h"/>
+    <File Name="api_headers/pLog.h"/>
+    <File Name="api_headers/PlatformSpecific.h"/>
+    <File Name="api_headers/Locations.h"/>
+    <File Name="api_headers/HTNWorldState.h"/>
+    <File Name="api_headers/HTNPlanner.h"/>
+    <File Name="api_headers/Constants.h"/>
+    <File Name="api_headers/AbstractPlayerData.h"/>
+    <File Name="api_headers/AbstractMission.h"/>
+    <File Name="api_headers/AbstractItem.h"/>
+    <File Name="api_headers/AbstractAction.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>

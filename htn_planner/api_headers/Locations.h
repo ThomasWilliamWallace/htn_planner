@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "PlatformSpecific.hpp"
+#include "PlatformSpecific.h"
 
 UENUM(BlueprintType, Blueprintable)
 enum class ELocations : uint8

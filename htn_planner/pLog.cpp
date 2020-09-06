@@ -1,5 +1,5 @@
-#include "pLog.hpp"
-#include "Constants.hpp"
+#include "pLog.h"
+#include "Constants.h"
 
 #ifdef TEXT_ONLY_HTN
 

@@ -1,4 +1,4 @@
-#include "AbstractItem.hpp"
+#include "AbstractItem.h"
 
 std::string ItemTypeToString(EItemType itemType)
 {

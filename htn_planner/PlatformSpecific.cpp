@@ -1,8 +1,8 @@
-#include "PlatformSpecific.hpp"
-#include "HTNPlanner.hpp"
-#include "AbstractItem.hpp"
-#include "AbstractPlayerData.hpp"
-#include "Locations.hpp"
+#include "PlatformSpecific.h"
+#include "HTNPlanner.h"
+#include "AbstractItem.h"
+#include "AbstractPlayerData.h"
+#include "Locations.h"
 
 HTNPrimitive* GetRaw(HTNPrimitivePtr ptr)
 {

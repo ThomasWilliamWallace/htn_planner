@@ -1,6 +1,6 @@
-#include "AbstractMission.hpp"
-#include "AbstractPlayerData.hpp"
-#include "Constants.hpp"
+#include "AbstractMission.h"
+#include "AbstractPlayerData.h"
+#include "Constants.h"
 #include <stdexcept>
 #include <assert.h>
 

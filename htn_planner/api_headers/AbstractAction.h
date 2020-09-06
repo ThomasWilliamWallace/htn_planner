@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <iostream>
-#include "PlatformSpecific.hpp"
+#include "PlatformSpecific.h"
 
 class AbstractMission;
 

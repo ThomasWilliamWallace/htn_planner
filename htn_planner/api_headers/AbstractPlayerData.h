@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
-#include "PStats.hpp"
-#include "AbstractMission.hpp"
-#include "AbstractAction.hpp"
+#include "PStats.h"
+#include "AbstractMission.h"
+#include "AbstractAction.h"
 
 class AbstractPlayerData
 {

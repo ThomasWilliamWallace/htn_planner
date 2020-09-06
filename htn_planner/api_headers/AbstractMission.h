@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
-#include "AbstractItem.hpp"
-#include "PlatformSpecific.hpp"
+#include "AbstractItem.h"
+#include "PlatformSpecific.h"
 
 class AbstractPlayerData;
 

@@ -2,11 +2,11 @@
 
 #include <vector>
 #include <iostream>
-#include "Locations.hpp"
+#include "Locations.h"
 #include "Constants.h"
-#include "PlatformSpecific.hpp"
-#include "AbstractMission.hpp"
-#include "AbstractItem.hpp"
+#include "PlatformSpecific.h"
+#include "AbstractMission.h"
+#include "AbstractItem.h"
 #include "AbstractPlayerData.h"
 
 class HTNWorldState

@@ -1,8 +1,8 @@
-#include "HTNWorldState.hpp"
+#include "HTNWorldState.h"
 #include <cmath>
-#include "AbstractPlayerData.hpp"
-#include "AbstractItem.hpp"
-#include "pLog.hpp"
+#include "AbstractPlayerData.h"
+#include "AbstractItem.h"
+#include "pLog.h"
 #include <sstream>
 
 //***********************************************************

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Locations.hpp"
-#include "PlatformSpecific.hpp"
+#include "Locations.h"
+#include "PlatformSpecific.h"
 
 class AbstractPlayerData;
 

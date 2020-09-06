@@ -1,5 +1,5 @@
-#include "AbstractAction.hpp"
-#include "AbstractMission.hpp"
+#include "AbstractAction.h"
+#include "AbstractMission.h"
 
 std::string ActionToString(Actions action)
 {

@@ -3,9 +3,9 @@
 #include <vector>
 #include <deque>
 #include <iostream>
-#include "HTNWorldState.hpp"
-#include "PlatformSpecific.hpp"
-#include "AbstractAction.hpp"
+#include "HTNWorldState.h"
+#include "PlatformSpecific.h"
+#include "AbstractAction.h"
 
 typedef std::deque< HTNPrimitivePtr > HTNPrimitiveList;
 typedef std::vector< HTNCompoundPtr > HTNCompoundList;

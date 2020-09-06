@@ -1,4 +1,4 @@
-#include "Locations.hpp"
+#include "Locations.h"
 
 std::string LocationToString(ELocations location)
 {
