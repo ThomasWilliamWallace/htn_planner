@@ -7,7 +7,7 @@
 class AbstractMission;
 
 UENUM(BlueprintType, Blueprintable)
-enum class Actions
+enum class Actions : uint8
 {
     attack,
     useRoom,

@@ -7,7 +7,7 @@
 class AbstractPlayerData;
 
 UENUM(BlueprintType, Blueprintable)
-enum class Missions
+enum class Missions : uint8
 {
     noMission,
     increaseStrength,
