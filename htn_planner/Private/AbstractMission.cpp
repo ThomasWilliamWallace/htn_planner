@@ -8,15 +8,15 @@ std::string AbstractMission::MissionName()
 {
     switch(m_mission)
     {
-        case (Missions::increaseAgility):
+        case (EMissions::increaseAgility):
             return "increase agility";
-        case (Missions::increaseStrength):
+        case (EMissions::increaseStrength):
             return "increase strength";
-        case (Missions::increaseIntelligence):
+        case (EMissions::increaseIntelligence):
             return "increase intelligence";
-        case (Missions::bringItemToRoom):
+        case (EMissions::bringItemToRoom):
             return "bring item to room";
-        case (Missions::noMission):
+        case (EMissions::noMission):
             return "no mission";
     }
     ThrowException("UnrecognisedMission");
@@ -26,34 +26,34 @@ std::string AbstractMission::MissionNarrative()
 {
     switch (m_mission)
     {
-        case Missions::noMission:
+        case EMissions::noMission:
             return "No Mission\n";
-        case Missions::increaseAgility:
+        case EMissions::increaseAgility:
             return "Mission: " + m_owner->m_playerName + " must " + MissionName() + " to " + FormatDouble(m_objective) + ". (current=" + FormatDouble(m_owner->pStats.getAgility()) + ")";
-        case Missions::increaseStrength:
+        case EMissions::increaseStrength:
             return "Mission: " + m_owner->m_playerName + " must " + MissionName() + " to " + FormatDouble(m_objective) + ". (current=" + FormatDouble(m_owner->pStats.getStrength()) + ")";
-        case Missions::increaseIntelligence:
+        case EMissions::increaseIntelligence:
             return "Mission: " + m_owner->m_playerName + " must " + MissionName() + " to " + FormatDouble(m_objective) + ". (current=" + FormatDouble(m_owner->pStats.getIntelligence()) + ")";
-        case Missions::bringItemToRoom:
+        case EMissions::bringItemToRoom:
             return "Mission: " + m_owner->m_playerName + " must bring a " + ItemTypeToString(m_itemType) + " to the " + m_locationClass.ToString() + ".";
     }
     ThrowException("ERROR: MISSION TYPE NOT RECOGNISED");
 }
 
-Missions GetRandomMission()
+EMissions GetRandomMission()
 {
     int random = rand() % 100;
     if (random<25)
-        return Missions::increaseStrength;
+        return EMissions::increaseStrength;
     else if (random<50)
-        return Missions::increaseAgility;
+        return EMissions::increaseAgility;
     else if (random<75)
-        return Missions::increaseIntelligence;
+        return EMissions::increaseIntelligence;
     else
-        return Missions::bringItemToRoom;
+        return EMissions::bringItemToRoom;
 }
 
-AbstractMission::AbstractMission(Missions mission, AbstractPlayerData* owner, double objective):
+AbstractMission::AbstractMission(EMissions mission, AbstractPlayerData* owner, double objective):
 	m_mission(mission),
 	m_owner(owner),
 	m_objective(objective)
@@ -61,7 +61,7 @@ AbstractMission::AbstractMission(Missions mission, AbstractPlayerData* owner, do
     assert(m_owner!=nullptr);
 }
 
-AbstractMission::AbstractMission(Missions mission, AbstractPlayerData* owner, EItemType itemType, ELocations location):
+AbstractMission::AbstractMission(EMissions mission, AbstractPlayerData* owner, EItemType itemType, ELocations location):
 	m_mission(mission),
 	m_owner(owner),
 	m_itemType(itemType),
@@ -85,24 +85,24 @@ AbstractMission::AbstractMission(AbstractPlayerData* owner):
 	m_owner(owner)
 {
     assert(m_owner!=nullptr);
-	//m_mission = Missions::bringItemToRoom;
+	//m_mission = EMissions::bringItemToRoom;
 	//m_itemType = EItemType::ball;
 	//m_locationClass = ELocations::mainHall; // GetRandomLocation();
 	//return;
 	switch (m_mission)
 	{
-	case Missions::noMission:
+	case EMissions::noMission:
 		break;
-	case Missions::increaseAgility:
+	case EMissions::increaseAgility:
 		m_objective = m_owner->pStats.getAgility();
 		break;
-	case Missions::increaseStrength:
+	case EMissions::increaseStrength:
 		m_objective = m_owner->pStats.getStrength();
 		break;
-	case Missions::increaseIntelligence:
+	case EMissions::increaseIntelligence:
 		m_objective = m_owner->pStats.getIntelligence();
 		break;
-	case Missions::bringItemToRoom:
+	case EMissions::bringItemToRoom:
 		m_itemType = GetRandomItemType();
 		m_locationClass = GetRandomLocation();
 		break;
@@ -117,18 +117,18 @@ AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr)
     m_mission = GetRandomMission();
     switch (m_mission)
     {
-        case Missions::noMission:
+        case EMissions::noMission:
             return;
-        case Missions::increaseAgility:
+        case EMissions::increaseAgility:
             m_objective = playerPtr->pStats.getAgility();
             break;
-        case Missions::increaseStrength:
+        case EMissions::increaseStrength:
             m_objective = playerPtr->pStats.getStrength();
             break;
-        case Missions::increaseIntelligence:
+        case EMissions::increaseIntelligence:
             m_objective = playerPtr->pStats.getIntelligence();
             break;
-        case Missions::bringItemToRoom:
+        case EMissions::bringItemToRoom:
             m_itemType = GetRandomItemType();
             m_locationClass = GetRandomLocation();
             return;

@@ -6,6 +6,7 @@
     </Plugin>
   </Plugins>
   <VirtualDirectory Name="Public">
+    <File Name="Public/EMissions.h"/>
     <File Name="Public/EItemType.h"/>
     <File Name="Public/EActions.h"/>
     <File Name="Public/PStats.h"/>
