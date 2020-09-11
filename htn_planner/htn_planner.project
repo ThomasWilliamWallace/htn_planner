@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="htn_planner" Version="10.0.0" InternalType="Library">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00010001N0005Debug000000000000]]>
+    </Plugin>
+  </Plugins>
   <VirtualDirectory Name="Public">
+    <File Name="Public/EItemType.h"/>
+    <File Name="Public/EActions.h"/>
     <File Name="Public/PStats.h"/>
     <File Name="Public/pLog.h"/>
     <File Name="Public/PlatformSpecific.h"/>
@@ -26,11 +33,6 @@
     <File Name="Private/AbstractItem.cpp"/>
     <File Name="Private/AbstractAction.cpp"/>
   </VirtualDirectory>
-  <Plugins>
-    <Plugin Name="qmake">
-      <![CDATA[00010001N0005Debug000000000000]]>
-    </Plugin>
-  </Plugins>
   <Description/>
   <Dependencies/>
   <Dependencies Name="Debug"/>
