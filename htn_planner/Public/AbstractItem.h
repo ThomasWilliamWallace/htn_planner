@@ -2,40 +2,9 @@
 
 #include "Locations.h"
 #include "PlatformSpecific.h"
+#include "EItemType.h"
 
 class AbstractPlayerData;
-
-UENUM(BlueprintType, Blueprintable)
-enum class EItemType : uint8
-{
-	assaultRifle,
-	ball,
-	barbell,
-	bat,
-	baton,
-	bottle,
-	brick,
-	broom,
-	cigarette,
-	cleaver,
-	comb,
-	dumbbell,
-	dynamite,
-	extinguisher,
-	hammer,
-	knife,
-	mirror,
-	pipe,
-	pistol,
-	plank,
-	poolCue,
-	rock,
-	scissors,
-	screw,
-	sword,
-	syringe,
-    LAST = syringe
-};
 
 std::string ItemTypeToString(EItemType itemType);
 EItemType GetRandomItemType();
