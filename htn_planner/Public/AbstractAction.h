@@ -15,6 +15,7 @@ public:
     BaseAction(EActions action): m_action(action) {};
     virtual std::string ToString();
     EActions m_action;
+    virtual ~BaseAction();
 };
 
 class AttackAction : public BaseAction
