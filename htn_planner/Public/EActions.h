@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef TEXT_ONLY_HTN
+#include "EActions.generated.h"
+#endif
+
 UENUM(BlueprintType, Blueprintable)
 enum class EActions : uint8
 {
