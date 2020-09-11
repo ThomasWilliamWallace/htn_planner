@@ -3,81 +3,59 @@
 #include <vector>
 #include <iostream>
 #include "PlatformSpecific.h"
+#include "EActions.h"
 
 class AbstractMission;
 
-UENUM(BlueprintType, Blueprintable)
-enum class Actions : uint8
-{
-    attack,
-    useRoom,
-    goToLibrary,
-    goToGym,
-    goToCircuitTrack,
-    goToBedroom,
-    goToMainHall,
-    evade,
-    makeFriends,
-    offerMission,
-    pickUpItemByPtr,
-    pickUpItemByType,
-    dropItem,
-    requestItem,
-    acceptRequest,
-    declineRequest,
-    noAction, // serves as a flag for any unset actions
-    LAST = noAction
-};
-
-std::string ActionToString(Actions action);
+std::string ActionToString(EActions action);
 
 class BaseAction
 {
 public:
-    BaseAction(Actions action): m_action(action) {};
+    BaseAction(EActions action): m_action(action) {};
     virtual std::string ToString();
-    Actions m_action;
+    EActions m_action;
 };
 
 class AttackAction : public BaseAction
 {
 public:
-    AttackAction(AbstractPlayerData* targetPlayer): BaseAction(Actions::attack), m_targetPlayer(targetPlayer) {};
+    AttackAction(AbstractPlayerData* targetPlayer): BaseAction(EActions::attack), m_targetPlayer(targetPlayer) {};
     AbstractPlayerData* m_targetPlayer;
 };
 
 class PickUpItemByPtrAction : public BaseAction
 {
 public:
-    PickUpItemByPtrAction(AbstractItem* itemFocusPtr): BaseAction(Actions::pickUpItemByPtr), m_itemFocusPtr(itemFocusPtr) {};
+    PickUpItemByPtrAction(AbstractItem* itemFocusPtr): BaseAction(EActions::pickUpItemByPtr), m_itemFocusPtr(itemFocusPtr) {};
     AbstractItem* m_itemFocusPtr;
 };
 
 class PickUpItemByTypeAction : public BaseAction
 {
 public:
-    PickUpItemByTypeAction(EItemType itemType): BaseAction(Actions::pickUpItemByType), m_itemType(itemType) {};
+    PickUpItemByTypeAction(EItemType itemType): BaseAction(EActions::pickUpItemByType), m_itemType(itemType) {};
     EItemType m_itemType;
 };
 
 class RequestItemAction : public BaseAction
 {
 public:
-    RequestItemAction(AbstractPlayerData* targetPlayer): BaseAction(Actions::requestItem), m_targetPlayer(targetPlayer) {};
+    RequestItemAction(AbstractPlayerData* targetPlayer): BaseAction(EActions::requestItem), m_targetPlayer(targetPlayer) {};
     AbstractPlayerData* m_targetPlayer;
 };
 
 class MakeFriendsAction : public BaseAction
 {
 public:
-    MakeFriendsAction(AbstractPlayerData* targetPlayer): BaseAction(Actions::makeFriends), m_targetPlayer(targetPlayer) {};
+    MakeFriendsAction(AbstractPlayerData* targetPlayer): BaseAction(EActions::makeFriends), m_targetPlayer(targetPlayer) {};
     AbstractPlayerData* m_targetPlayer;
 };
 
 class OfferMissionAction : public BaseAction
 {
 public:
-    OfferMissionAction(AbstractPlayerData* targetPlayer, std::shared_ptr<AbstractMission> offeredMission): BaseAction(Actions::offerMission), m_targetPlayer(targetPlayer), m_offeredMission(offeredMission) {};
+    OfferMissionAction(AbstractPlayerData* targetPlayer, std::shared_ptr<AbstractMission> offeredMission): BaseAction(EActions::offerMission), m_targetPlayer(targetPlayer), m_offeredMission(offeredMission) {};
     AbstractPlayerData* m_targetPlayer;
     std::shared_ptr<AbstractMission> m_offeredMission;
 };

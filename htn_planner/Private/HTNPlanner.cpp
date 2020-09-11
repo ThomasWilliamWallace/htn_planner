@@ -29,7 +29,7 @@ void HTNPrimitive::Effect(HTNWorldState &htnWorldState)
 std::shared_ptr<BaseAction> HTNPrimitive::Operate(AbstractPlayerData* playerData)
 {
     ThrowException("HTNPrimitive::Operate not defined");
-    return std::make_shared<BaseAction>(Actions::noAction);
+    return std::make_shared<BaseAction>(EActions::noAction);
 }
 
 bool HTNPrimitive::LastActionSucceeded(HTNWorldState &htnWorldState)
