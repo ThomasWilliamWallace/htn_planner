@@ -8,6 +8,7 @@ class HTNMethod;
 struct StackNode;
 class AbstractItem;
 class SimItem;
+class AbstractPlayerData;
 
 typedef std::shared_ptr<HTNPrimitive> HTNPrimitivePtr;
 typedef std::shared_ptr<HTNCompound> HTNCompoundPtr;
@@ -26,7 +27,6 @@ typedef std::shared_ptr<SimItem> SimItemPtr;
 
 #include <map>
 
-class AbstractPlayerData;
 class Relationship;
 
 typedef uint8_t uint8;
