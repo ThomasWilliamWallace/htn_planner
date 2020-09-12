@@ -37,7 +37,7 @@ HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap
 //    std::cout << "\n";
 }
 
-HTNWorldState::HTNWorldState(HTNWorldState &ws2):
+HTNWorldState::HTNWorldState(HTNWorldState const& ws2):
     m_ptrToSelf(ws2.m_ptrToSelf),
     m_health(ws2.m_health),
     m_sanity(ws2.m_sanity),
@@ -69,7 +69,7 @@ HTNWorldState::HTNWorldState(HTNWorldState &ws2):
 //    std::cout << "\n";
 }
 
-HTNWorldState& HTNWorldState::operator=(const HTNWorldState& ws2)
+HTNWorldState& HTNWorldState::operator=(HTNWorldState const& ws2)
 {
     m_ptrToSelf = ws2.m_ptrToSelf;
     m_health = ws2.m_health;
@@ -148,11 +148,11 @@ void HTNWorldState::Print()
     pLog(ss);
 }
 
-bool HTNWorldState::IsInTheRoom(AbstractPlayerData* playerPtr)
+bool HTNWorldState::IsInTheRoom(AbstractPlayerData const& playerPtr) const
 {
     for (auto &p : m_playersInTheRoom)
     {
-        if (p == playerPtr)
+        if (p == &playerPtr)
         {
             return true;
         }

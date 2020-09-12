@@ -1,5 +1,4 @@
 #include "AbstractAction.h"
-#include "AbstractMission.h"
 
 std::string ActionToString(EActions action)
 {

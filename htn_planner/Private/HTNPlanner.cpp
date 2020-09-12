@@ -14,7 +14,7 @@ std::string HTNNode::ToString()
 //*******************************************************************
 HTNPrimitive::HTNPrimitive(std::string name): HTNNode(name, HTNType::Primitive) {}
 
-bool HTNPrimitive::Preconditions(HTNWorldState &htnWorldState)
+bool HTNPrimitive::Preconditions(HTNWorldState const& htnWorldState)
 {
     ThrowException("HTNPrimitive::Preconditions not defined");
     return true;
@@ -32,7 +32,7 @@ std::shared_ptr<BaseAction> HTNPrimitive::Operate(AbstractPlayerData* playerData
     return std::make_shared<BaseAction>(EActions::noAction);
 }
 
-bool HTNPrimitive::LastActionSucceeded(HTNWorldState &htnWorldState)
+bool HTNPrimitive::LastActionSucceeded(HTNWorldState const& htnWorldState)
 {
 	return true;
 }

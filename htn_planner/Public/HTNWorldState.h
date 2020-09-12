@@ -27,10 +27,10 @@ public:
     AbstractPlayerData* m_requester; // Pointer to the player who is requesting the currently carried item.
     std::vector<AbstractPlayerData*> m_attackers;
     std::vector< AbstractPlayerData* > m_playersInTheRoom;
-    bool IsInTheRoom(AbstractPlayerData* playerPtr);
-    HTNWorldState(HTNWorldState &ws2);
+    bool IsInTheRoom(AbstractPlayerData const& playerPtr) const;
+    HTNWorldState(HTNWorldState const& ws2);
     HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<AbstractItem*>& worldItems,
                   AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom);
-    HTNWorldState& operator=(const HTNWorldState& ws2);
+    HTNWorldState& operator=(HTNWorldState const& ws2);
     void Print();
 };
