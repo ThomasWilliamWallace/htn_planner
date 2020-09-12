@@ -8,14 +8,15 @@ class HTNMethod;
 struct StackNode;
 class AbstractItem;
 class SimItem;
-class AbstractPlayerData;
-class Relationship;
 
 typedef std::shared_ptr<HTNPrimitive> HTNPrimitivePtr;
 typedef std::shared_ptr<HTNCompound> HTNCompoundPtr;
 typedef std::shared_ptr<HTNNode> HTNNodePtr;
 typedef std::shared_ptr<HTNMethod> HTNMethodPtr;
 typedef std::shared_ptr<StackNode> StackNodePtr;
+
+typedef std::shared_ptr<AbstractItem> AbstractItemPtr;
+typedef std::shared_ptr<SimItem> SimItemPtr;
 
 #ifdef TEXT_ONLY_HTN
 
@@ -25,8 +26,8 @@ typedef std::shared_ptr<StackNode> StackNodePtr;
 
 #include <map>
 
-typedef std::shared_ptr<AbstractItem> AbstractItemPtr;
-typedef std::shared_ptr<SimItem> SimItemPtr;
+class AbstractPlayerData;
+class Relationship;
 
 typedef uint8_t uint8;
 
@@ -81,7 +82,8 @@ void RemoveCurrent(Container &container, Iterator iter)
 
 #include "Runtime/Core/Public/Containers/Map.h"
 
-typedef TSharedPtr<SimActorItem> SimActorItemPtr;
+class UPlayerData;
+class URelationship;
 
 typedef TMap<int, UPlayerData*> PlayerMap;
 typedef TPair<int, UPlayerData*> IntPlayerPair;
@@ -148,7 +150,9 @@ HTNMethodPtr CastNodeToMethod(HTNNodePtr htnNodePtr);
 
 StackNodePtr MakeSharedStackNodePtr(HTNNodePtr htnNodePtr, bool isOr);
 HTNNodePtr MakeShareableCompound(HTNCompound &htnCompound);
+
 AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer);
+SimItemPtr MakeSharedSimItemPtr(AbstractItem* realItem, EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer);
 
 // Encapsulated because Unreal Engine uses a different exception system
 [[noreturn]] void ThrowException(const std::string& errorMessage);
