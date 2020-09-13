@@ -30,7 +30,7 @@ void AbstractPlayerData::PrintPlayer()
         ss << "NULLPTR\n";
     }
     ss << "\n";
-    pLog(ss, true);
+    pLog(ss);
     pStats.PrintStats();
 }
 
