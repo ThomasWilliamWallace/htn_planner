@@ -22,7 +22,13 @@ void AbstractPlayerData::PrintPlayer()
     ss << "lastLocation=" << lastLocationClass.ToString() << "\n";
     ss << "attacked=" << BoolToString(attacked) << "\n";
     ss << "narrative=" << narrative << "\n";
-    ss << "missionClass=" << missionClass->MissionNarrative() << "\n";
+    ss << "missionClass=";
+    if (missionClass.get() != nullptr) {
+        ss << missionClass->MissionNarrative() << "\n";
+    }
+    else {
+        ss << "NULLPTR\n";
+    }
     ss << "\n";
     pLog(ss, true);
     pStats.PrintStats();
