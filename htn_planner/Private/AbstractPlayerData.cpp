@@ -27,3 +27,14 @@ void AbstractPlayerData::PrintPlayer()
     pLog(ss, true);
     pStats.PrintStats();
 }
+
+// Member variables set in constructor to work with Unreal Engine.
+AbstractPlayerData::AbstractPlayerData()
+{
+    action = std::make_shared<BaseAction>(EActions::useRoom);
+    lastAction = std::make_shared<BaseAction>(EActions::useRoom);
+    attacked = false;
+    narrative = "Narrative not set";
+    m_playerName = "No-name";
+    missionClass = std::make_shared<AbstractMission>(RandomMission::CreateRandomMission, this);
+}
