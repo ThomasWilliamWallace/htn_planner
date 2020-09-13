@@ -84,58 +84,30 @@ AbstractMission::AbstractMission(AbstractPlayerData* owner):
 	m_mission(GetRandomMission()),
 	m_owner(owner)
 {
-    assert(m_owner!=nullptr);
-	//m_mission = EMissions::bringItemToRoom;
-	//m_itemType = EItemType::ball;
-	//m_locationClass = ELocations::mainHall; // GetRandomLocation();
-	//return;
-	switch (m_mission)
-	{
-	    case EMissions::noMission:
-		    break;
-	    case EMissions::increaseAgility:
-		    m_objective = m_owner->pStats.getAgility();
-		    break;
-	    case EMissions::increaseStrength:
-		    m_objective = m_owner->pStats.getStrength();
-		    break;
-	    case EMissions::increaseIntelligence:
-		    m_objective = m_owner->pStats.getIntelligence();
-		    break;
-	    case EMissions::bringItemToRoom:
-		    m_itemType = GetRandomItemType();
-		    m_locationClass = GetRandomLocation();
-		    return;
-        default:
-            ThrowException("Selected an invalid mission type.");
-	}
-	m_objective += 3; //todo ensure that the mission is achievable, ie 100 or below
-}
-
-AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr):
-	m_owner(playerPtr)
-{
-    assert(m_owner!=nullptr);
-    m_mission = GetRandomMission();
+    assert(m_owner != nullptr);
     switch (m_mission)
     {
-        case EMissions::noMission:
-            return;
-        case EMissions::increaseAgility:
-            m_objective = playerPtr->pStats.getAgility();
-            break;
-        case EMissions::increaseStrength:
-            m_objective = playerPtr->pStats.getStrength();
-            break;
-        case EMissions::increaseIntelligence:
-            m_objective = playerPtr->pStats.getIntelligence();
-            break;
-        case EMissions::bringItemToRoom:
-            m_itemType = GetRandomItemType();
-            m_locationClass = GetRandomLocation();
-            return;
-	default:
-	    ThrowException("Selected an invalid mission type.");
+    case EMissions::noMission:
+        return;
+    case EMissions::increaseAgility:
+        m_objective = owner->pStats.getAgility();
+        break;
+    case EMissions::increaseStrength:
+        m_objective = owner->pStats.getStrength();
+        break;
+    case EMissions::increaseIntelligence:
+        m_objective = owner->pStats.getIntelligence();
+        break;
+    case EMissions::bringItemToRoom:
+        m_itemType = GetRandomItemType();
+        m_locationClass = GetRandomLocation();
+        return;
+    default:
+        ThrowException("Selected an invalid mission type.");
     }
     m_objective += 3; //todo ensure that the mission is achievable, ie 100 or below
 }
+
+AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr):
+    AbstractMission(playerPtr)
+{}
