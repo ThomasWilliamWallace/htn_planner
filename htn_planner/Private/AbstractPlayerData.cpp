@@ -31,7 +31,7 @@ void AbstractPlayerData::PrintPlayer()
     }
     ss << "\n";
     pLog(ss);
-    pStats.PrintStats();
+    //pStats.PrintStats();
 }
 
 // Member variables set in constructor to work with Unreal Engine.
