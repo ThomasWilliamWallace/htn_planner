@@ -70,7 +70,7 @@ AbstractMission::AbstractMission(EMissions mission, AbstractPlayerData* owner, E
     assert(m_owner!=nullptr);
 }
 
-AbstractMission::AbstractMission(const AbstractMission& missionClass) :
+AbstractMission::AbstractMission(const AbstractMission& missionClass):
     m_mission(missionClass.m_mission),
     m_owner(missionClass.m_owner),
     m_objective(missionClass.m_objective),
@@ -91,26 +91,28 @@ AbstractMission::AbstractMission(AbstractPlayerData* owner):
 	//return;
 	switch (m_mission)
 	{
-	case EMissions::noMission:
-		break;
-	case EMissions::increaseAgility:
-		m_objective = m_owner->pStats.getAgility();
-		break;
-	case EMissions::increaseStrength:
-		m_objective = m_owner->pStats.getStrength();
-		break;
-	case EMissions::increaseIntelligence:
-		m_objective = m_owner->pStats.getIntelligence();
-		break;
-	case EMissions::bringItemToRoom:
-		m_itemType = GetRandomItemType();
-		m_locationClass = GetRandomLocation();
-		break;
+	    case EMissions::noMission:
+		    break;
+	    case EMissions::increaseAgility:
+		    m_objective = m_owner->pStats.getAgility();
+		    break;
+	    case EMissions::increaseStrength:
+		    m_objective = m_owner->pStats.getStrength();
+		    break;
+	    case EMissions::increaseIntelligence:
+		    m_objective = m_owner->pStats.getIntelligence();
+		    break;
+	    case EMissions::bringItemToRoom:
+		    m_itemType = GetRandomItemType();
+		    m_locationClass = GetRandomLocation();
+		    return;
+        default:
+            ThrowException("Selected an invalid mission type.");
 	}
 	m_objective += 3; //todo ensure that the mission is achievable, ie 100 or below
 }
 
-AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr) :
+AbstractMission::AbstractMission(RandomMission r, AbstractPlayerData* playerPtr):
 	m_owner(playerPtr)
 {
     assert(m_owner!=nullptr);
