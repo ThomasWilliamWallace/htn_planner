@@ -45,11 +45,11 @@ void HTNCompound::AddMethod(HTNMethod* htnMethod)
     m_methods.push_back(HTNMethodPtr(htnMethod));
 }
 
-HTNMethodList& HTNCompound::GetMethods()
+HTNMethodList& HTNCompound::GetMethods(HTNWorldState const& htnWorldState)
 {
     if (!m_alreadyCreatedMethods)
     {
-        CreateMethods();
+        CreateMethods(htnWorldState);
         m_alreadyCreatedMethods = true;
     }
     return m_methods;
@@ -74,11 +74,11 @@ void HTNMethod::AddTask(HTNCompound* htnCompound)
     m_nodeList.push_back(HTNCompoundPtr(htnCompound));
 }
 
-HTNNodeList& HTNMethod::GetTasks()
+HTNNodeList& HTNMethod::GetTasks(HTNWorldState const& htnWorldState)
 {
     if (!m_alreadyCreatedTasks)
     {
-        CreateTasks();
+        CreateTasks(htnWorldState);
         m_alreadyCreatedTasks = true;
     }
     return m_nodeList;
@@ -191,7 +191,7 @@ HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot
                     {
                         pLog("lastTaskPrecon == true");
                         //construct the tasks of this method, and push them onto the nodeStack. The first task should be at the top of the nodeStack
-                        HTNNodeList taskList = htnMethod->GetTasks();
+                        HTNNodeList taskList = htnMethod->GetTasks(*worldStateStack.top());
                         for (auto task = taskList.rbegin(); task != taskList.rend(); ++task)
                         {
                             nodeStack.push(MakeSharedStackNodePtr(*task, false));
@@ -226,7 +226,7 @@ HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot
                     decompositions.push(DecompositionFrame(static_cast<int>(nodeStack.size()), static_cast<int>(htnPlanStack.size())));
                     
                     //construct methods of this task, and push them onto the nodeStack. The highest priority method should be at the top of the nodeStack.
-                    HTNMethodList methodList = htnCompound->GetMethods();
+                    HTNMethodList methodList = htnCompound->GetMethods(*worldStateStack.top());
                     for (auto method = methodList.rbegin(); method != methodList.rend(); ++method)
                     {
                         nodeStack.push(MakeSharedStackNodePtr(*method, true));
