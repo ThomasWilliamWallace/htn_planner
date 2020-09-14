@@ -62,7 +62,7 @@ AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations locatio
     return std::make_shared<AbstractItem>(itemType, location, carryingPlayer);
 }
 
-SimItemPtr MakeSharedSimItemPtr(AbstractItem* realItem, EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer)
+SimItemPtr MakeSharedSimItemPtr(RealItemType* realItem, EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer)
 {
     return std::make_shared<SimItem>(realItem, itemType, location, carryingPlayer);
 }
@@ -79,6 +79,7 @@ SimItemPtr MakeSharedSimItemPtr(AbstractItem* realItem, EItemType itemType, ELoc
 // Unreal engine case
 
 #include "Engine/GameEngine.h"
+#include "ActorItem.h"
 
     // TODO split the platform specific code into separate cpp files. The PlatformSpecific.cpp file can then be included from the appropriate location for different builds.
     // The TEXT_ONLY_HTN flag can then be done away with.

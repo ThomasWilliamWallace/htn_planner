@@ -1,5 +1,10 @@
 #include "AbstractItem.h"
 
+// Unreal version needs this include
+#ifndef TEXT_ONLY_HTN
+#include "ActorItem.h"
+#endif
+
 std::string ItemTypeToString(EItemType itemType)
 {
 	switch (itemType)
@@ -119,3 +124,21 @@ std::string AbstractItem::ToString()
 {
     return ItemTypeToString(m_itemType);
 }
+
+SimItem::SimItem(RealItemType* realItem) :
+	AbstractItem(realItem->m_itemType, realItem->m_locationClass.location),
+	m_realItem(realItem)
+{
+	if (realItem->m_carryingPlayer != nullptr) {
+		m_carryingPlayer = &(realItem->m_carryingPlayer->abstractPlayerData);
+	}
+}
+
+SimItem::SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer) :
+	AbstractItem(itemE, location, carryingPlayer),
+	m_realItem(realItem)
+{}
+
+SimItem::SimItem(SimItem& item) :
+	SimItem(item.m_realItem, item.m_itemType, item.m_locationClass.location, item.m_carryingPlayer)
+{}

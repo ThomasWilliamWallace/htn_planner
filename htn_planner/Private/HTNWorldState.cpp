@@ -6,7 +6,7 @@
 #include <sstream>
 
 //***********************************************************
-HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<AbstractItem*>& worldItems,
+HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<SimItem*>& worldItems,
                              AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
     m_ptrToSelf(playerPtr),
     m_health(round(m_ptrToSelf->pStats.getHealth())),
@@ -23,7 +23,7 @@ HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap
 {
     for (auto &item : worldItems)
     {
-        m_items.push_back(std::make_shared<SimItem>(item, item->m_itemType, item->m_locationClass.location, item->m_carryingPlayer));
+        m_items.push_back(std::make_shared<SimItem>(*item));
         if ((m_items.back()->m_carryingPlayer) == m_ptrToSelf)
         {
             m_itemCarriedPtr = m_items.back();
@@ -54,9 +54,9 @@ HTNWorldState::HTNWorldState(HTNWorldState const& ws2):
 {
     for (auto &item : ws2.m_items)
     {
-        m_items.emplace_back(std::make_shared<SimItem>(item.get()));
+        m_items.emplace_back(std::make_shared<SimItem>(*(item.get())));
         m_items.back()->m_realItem = item->m_realItem;
-        if (ws2.m_itemCarriedPtr == item)
+        if (ws2.m_itemCarriedPtr != nullptr && ws2.m_itemCarriedPtr->m_realItem == item->m_realItem)
         {
             m_itemCarriedPtr = m_items.back();
         }
@@ -87,7 +87,7 @@ HTNWorldState& HTNWorldState::operator=(HTNWorldState const& ws2)
     m_items.clear();
     for (auto &item : ws2.m_items)
     {
-        m_items.emplace_back(std::make_shared<SimItem>(item.get()));
+        m_items.emplace_back(std::make_shared<SimItem>(*(item.get())));
         m_items.back()->m_realItem = item->m_realItem;
         if (ws2.m_itemCarriedPtr == item)
         {
