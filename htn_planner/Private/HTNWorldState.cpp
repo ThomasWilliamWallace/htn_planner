@@ -6,8 +6,13 @@
 #include <sstream>
 
 //***********************************************************
+#ifdef TEXT_ONLY_HTN
+HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<std::shared_ptr<AbstractItem>>& worldItems,
+              AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
+#else
 HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<std::shared_ptr<SimItem>>& worldItems,
               AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
+#endif
     m_ptrToSelf(playerPtr),
     m_health(round(m_ptrToSelf->pStats.getHealth())),
     m_sanity(round(m_ptrToSelf->pStats.getSanity())),
@@ -23,7 +28,11 @@ HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap
 {
     for (auto &item : worldItems)
     {
+#ifdef TEXT_ONLY_HTN
+        m_items.push_back(std::make_shared<SimItem>(item.get()));
+#else
         m_items.push_back(std::make_shared<SimItem>(*item));
+#endif
         if ((m_items.back()->m_carryingPlayer) == m_ptrToSelf)
         {
             m_itemCarriedPtr = m_items.back();
