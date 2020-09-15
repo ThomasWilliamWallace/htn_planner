@@ -6,8 +6,8 @@
 #include <sstream>
 
 //***********************************************************
-HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<SimItem*>& worldItems,
-                             AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
+HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<std::shared_ptr<SimItem>>& worldItems,
+              AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
     m_ptrToSelf(playerPtr),
     m_health(round(m_ptrToSelf->pStats.getHealth())),
     m_sanity(round(m_ptrToSelf->pStats.getSanity())),

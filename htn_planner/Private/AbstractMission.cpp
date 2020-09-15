@@ -84,6 +84,10 @@ AbstractMission::AbstractMission(AbstractPlayerData* owner):
 	m_mission(GetRandomMission()),
 	m_owner(owner)
 {
+    m_mission = EMissions::bringItemToRoom;
+    m_itemType = EItemType::ball;
+    m_locationClass = LocationClass(ELocations::gym);
+    return;
     assert(m_owner != nullptr);
     switch (m_mission)
     {
