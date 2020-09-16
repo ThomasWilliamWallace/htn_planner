@@ -29,7 +29,7 @@ HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap
     for (auto &item : worldItems)
     {
 #ifdef TEXT_ONLY_HTN
-        m_items.push_back(std::make_shared<SimItem>(item.get()));
+        m_items.push_back(std::make_shared<SimItem>(CreateSimFromRealItem::CreateSimFromRealItem, item.get()));
 #else
         m_items.push_back(std::make_shared<SimItem>(*item));
 #endif

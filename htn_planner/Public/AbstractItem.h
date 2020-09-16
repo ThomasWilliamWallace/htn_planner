@@ -23,10 +23,14 @@ public:
     std::string ToString();
 };
 
+enum class CreateSimFromRealItem {
+    CreateSimFromRealItem
+};
+
 class SimItem : public AbstractItem
 {
 public:
-    SimItem(RealItemType* realItem);
+    SimItem(CreateSimFromRealItem c, RealItemType* realItem);
     SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer = nullptr);
     SimItem(SimItem& item);
     
