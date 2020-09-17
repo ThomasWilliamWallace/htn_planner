@@ -126,7 +126,7 @@ std::string AbstractItem::ToString()
     return ItemTypeToString(m_itemType);
 }
 
-SimItem::SimItem(RealItemType* realItem) :
+SimItem::SimItem(CreateSimFromRealItem c, RealItemType* realItem):
 	AbstractItem(realItem->m_itemType, realItem->m_locationClass.location),
 	m_realItem(realItem)
 {
@@ -141,11 +141,11 @@ SimItem::SimItem(RealItemType* realItem) :
 #endif
 }
 
-SimItem::SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer) :
+SimItem::SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer):
 	AbstractItem(itemE, location, carryingPlayer),
 	m_realItem(realItem)
 {}
 
-SimItem::SimItem(SimItem& item) :
+SimItem::SimItem(SimItem& item):
 	SimItem(item.m_realItem, item.m_itemType, item.m_locationClass.location, item.m_carryingPlayer)
 {}
