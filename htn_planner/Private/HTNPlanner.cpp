@@ -32,11 +32,6 @@ std::shared_ptr<BaseAction> HTNPrimitive::Operate(AbstractPlayerData* playerData
     return std::make_shared<BaseAction>(EActions::noAction);
 }
 
-bool HTNPrimitive::LastActionSucceeded(HTNWorldState const& htnWorldState)
-{
-	return true;
-}
-
 //*******************************************************************
 HTNCompound::HTNCompound(std::string name): HTNNode(name, HTNType::Compound), m_alreadyCreatedMethods(false) {}
 
