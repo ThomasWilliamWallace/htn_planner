@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+
 class HTNNode;
 class HTNPrimitive;
 class HTNCompound;
@@ -40,6 +41,7 @@ enum class ELocations : uint8;
 #define UPROPERTY(...)
 
 #include <map>
+#include <assert.h>
 
 class UPlayerData;
 class URelationship;
@@ -93,10 +95,13 @@ void RemoveCurrent(Container &container, Iterator iter)
 
 typedef AbstractItem RealItemType;
 
+#define check(X) assert(X)
+
 #else
 
 #include "Runtime/Core/Public/Containers/Map.h"
 
+#define assert(X) check(X)
 class UPlayerData;
 class URelationship;
 
