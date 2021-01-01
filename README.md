@@ -3,7 +3,7 @@
 A *hierarchical task network* planning library, allowing efficient planning by videogame AI.
 Any calling code requires a knowledge base to use 'htn_planner'.
 
-An example project using this library can be found at https://github.com/ThomasWilliamWallace/TaskPlanner/tree/split_planner_and_knowledge_base
+An example project using this library can be found at https://github.com/ThomasWilliamWallace/PrisonGame
 
 A great description of how a *hierarchical task network* planner works: http://www.gameaipro.com/GameAIPro/GameAIPro_Chapter12_Exploring_HTN_Planners_through_Example.pdf
 
