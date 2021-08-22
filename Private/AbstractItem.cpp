@@ -1,5 +1,5 @@
 #include "AbstractItem.h"
-#include "AbstractPlayerData.h"
+#include "PlayerData.h"
 
 // Unreal version needs this include
 #ifndef TEXT_ONLY_HTN
@@ -136,12 +136,12 @@ SimItem::SimItem(CreateSimFromRealItem c, RealItemType* realItem):
 	}
 #else
 	if (realItem->m_carryingPlayer != nullptr) {
-		m_carryingPlayer = &(realItem->m_carryingPlayer->abstractPlayerData);
+		m_carryingPlayer = &(realItem->m_carryingPlayer->UPlayerData);
 	}
 #endif
 }
 
-SimItem::SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer):
+SimItem::SimItem(RealItemType* realItem, EItemType itemE, ELocations location, UPlayerData* carryingPlayer):
 	AbstractItem(itemE, location, carryingPlayer),
 	m_realItem(realItem)
 {}

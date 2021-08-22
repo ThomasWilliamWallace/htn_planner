@@ -1,6 +1,7 @@
 #include "AbstractAction.h"
 #include "HTNWorldState.h"
 #include "EItemType.h"
+#include "Missions.h"
 
 std::string ActionToString(EActions action)
 {
@@ -87,14 +88,14 @@ bool PickUpItemByTypeAction::LastActionSucceeded(HTNWorldState const& htnWorldSt
 {
 	return (htnWorldState.m_itemCarriedPtr != nullptr) && (htnWorldState.m_itemCarriedPtr->m_itemType == m_itemType);
 }
-RequestItemAction::RequestItemAction(AbstractPlayerData* targetPlayer, EItemType itemType):
+RequestItemAction::RequestItemAction(UPlayerData* targetPlayer, EItemType itemType):
     BaseAction(EActions::requestItem),
     m_targetPlayer(targetPlayer),
     m_itemTypeSpecified(true),
     m_itemType(itemType)
 {}
 
-RequestItemAction::RequestItemAction(AbstractPlayerData* targetPlayer):
+RequestItemAction::RequestItemAction(UPlayerData* targetPlayer):
     BaseAction(EActions::requestItem),
     m_targetPlayer(targetPlayer),
     m_itemTypeSpecified(false),

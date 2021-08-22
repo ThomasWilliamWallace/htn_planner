@@ -4,7 +4,7 @@
 #include "PlatformSpecific.h"
 #include "EItemType.h"
 
-class AbstractPlayerData;
+class UPlayerData;
 
 std::string ItemTypeToString(EItemType itemType);
 EItemType GetRandomItemType();
@@ -14,9 +14,9 @@ class AbstractItem
 public:
     EItemType m_itemType;
     LocationClass m_locationClass;
-    AbstractPlayerData* m_carryingPlayer;
+    UPlayerData* m_carryingPlayer;
     
-    AbstractItem(EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer=nullptr): m_itemType(itemE), m_locationClass(location), m_carryingPlayer(carryingPlayer) {};
+    AbstractItem(EItemType itemE, ELocations location, UPlayerData* carryingPlayer=nullptr): m_itemType(itemE), m_locationClass(location), m_carryingPlayer(carryingPlayer) {};
     
     virtual ~AbstractItem() = default;
     
@@ -31,7 +31,7 @@ class SimItem : public AbstractItem
 {
 public:
     SimItem(CreateSimFromRealItem c, RealItemType* realItem);
-    SimItem(RealItemType* realItem, EItemType itemE, ELocations location, AbstractPlayerData* carryingPlayer = nullptr);
+    SimItem(RealItemType* realItem, EItemType itemE, ELocations location, UPlayerData* carryingPlayer = nullptr);
     SimItem(SimItem& item);
     
     RealItemType* m_realItem;
