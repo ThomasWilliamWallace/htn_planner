@@ -57,12 +57,12 @@ HTNNodePtr MakeShareableCompound(HTNCompound &htnCompound)
     return HTNNodePtr(&htnCompound);
 }
 
-AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer)
+AbstractItemPtr MakeSharedAbstractItemPtr(EItemType itemType, ELocations location, UPlayerData* carryingPlayer)
 {
     return std::make_shared<AbstractItem>(itemType, location, carryingPlayer);
 }
 
-SimItemPtr MakeSharedSimItemPtr(RealItemType* realItem, EItemType itemType, ELocations location, AbstractPlayerData* carryingPlayer)
+SimItemPtr MakeSharedSimItemPtr(RealItemType* realItem, EItemType itemType, ELocations location, UPlayerData* carryingPlayer)
 {
     return std::make_shared<SimItem>(realItem, itemType, location, carryingPlayer);
 }

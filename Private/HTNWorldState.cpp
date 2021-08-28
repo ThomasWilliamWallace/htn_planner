@@ -1,19 +1,21 @@
 #include "HTNWorldState.h"
 #include <cmath>
-#include "AbstractPlayerData.h"
+#include "PlayerData.h"
 #include "AbstractItem.h"
 #include "pLog.h"
 #include <sstream>
+#include "Missions.h"
 
 //***********************************************************
-HTNWorldState::HTNWorldState(AbstractPlayerData* playerPtr, PlayerMap& playerMap, std::vector<RealItemType*>& realItems,
-              AbstractPlayerData* requester, std::vector<AbstractPlayerData*> attackers, std::vector<AbstractPlayerData*> playersInTheRoom):
+HTNWorldState::HTNWorldState(UPlayerData* playerPtr, PlayerMap& playerMap, std::vector<RealItemType*>& realItems,
+              UPlayerData* requester, std::vector<UPlayerData*> attackers, std::vector<UPlayerData*> playersInTheRoom,
+              float health, float sanity, float strength, float agility, float intelligence):
     m_ptrToSelf(playerPtr),
-    m_health(round(m_ptrToSelf->pStats.getHealth())),
-    m_sanity(round(m_ptrToSelf->pStats.getSanity())),
-    m_strength(round(m_ptrToSelf->pStats.getStrength())),
-    m_agility(round(m_ptrToSelf->pStats.getAgility())),
-    m_intelligence(round(m_ptrToSelf->pStats.getIntelligence())),
+    m_health(health),
+    m_sanity(sanity),
+    m_strength(strength),
+    m_agility(agility),
+    m_intelligence(intelligence),
     m_evading(m_ptrToSelf->lastAction->m_action == EActions::evade),
     m_location(m_ptrToSelf->locationClass.location),
     m_missionClass(playerPtr->missionClass),
@@ -144,11 +146,11 @@ void HTNWorldState::Print()
             ThrowException("ERROR NULL PLAYERDATA VALUE");
     }
     ss << "]\n";
-    ss << "m_missionClass:" << m_missionClass->MissionName() << "\n";
+//    ss << "m_missionClass:" << m_missionClass->MissionName() << "\n";
     pLog(ss);
 }
 
-bool HTNWorldState::IsInTheRoom(AbstractPlayerData const& playerPtr) const
+bool HTNWorldState::IsInTheRoom(UPlayerData const& playerPtr) const
 {
     for (auto &p : m_playersInTheRoom)
     {
