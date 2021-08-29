@@ -2,6 +2,8 @@
 #include "pLog.h"
 #include <sstream>
 #include <stack>
+#include "Constants.h"
+#include "IHTNWorldState.h"
 
 //*******************************************************************
 HTNNode::HTNNode(std::string name, HTNType htnType) : m_name(name), m_HTNType(htnType) {}
@@ -14,13 +16,13 @@ std::string HTNNode::ToString()
 //*******************************************************************
 HTNPrimitive::HTNPrimitive(std::string name): HTNNode(name, HTNType::Primitive) {}
 
-bool HTNPrimitive::Preconditions(HTNWorldState const& htnWorldState)
+bool HTNPrimitive::Preconditions(IHTNWorldState const& iHTNWorldState)
 {
     ThrowException("HTNPrimitive::Preconditions not defined");
     return true;
 }
 
-void HTNPrimitive::Effect(HTNWorldState &htnWorldState)
+void HTNPrimitive::Effect(IHTNWorldState &iHTNWorldState)
 {
     ThrowException("HTNPrimitive::Effect not defined");
     return;
@@ -40,11 +42,11 @@ void HTNCompound::AddMethod(HTNMethod* htnMethod)
     m_methods.push_back(HTNMethodPtr(htnMethod));
 }
 
-HTNMethodList& HTNCompound::GetMethods(HTNWorldState const& htnWorldState)
+HTNMethodList& HTNCompound::GetMethods(IHTNWorldState const& iHTNWorldState)
 {
     if (!m_alreadyCreatedMethods)
     {
-        CreateMethods(htnWorldState);
+        CreateMethods(iHTNWorldState);
         m_alreadyCreatedMethods = true;
     }
     return m_methods;
@@ -53,10 +55,10 @@ HTNMethodList& HTNCompound::GetMethods(HTNWorldState const& htnWorldState)
 //*******************************************************************
 HTNMethod::HTNMethod(std::string name): HTNNode(name, HTNType::Method), m_alreadyCreatedTasks(false) {}
 
-bool HTNMethod::Preconditions(HTNWorldState &htnWorldState)
+bool HTNMethod::Preconditions(IHTNWorldState const& iHTNWorldState)
 {
     ThrowException("HTNMethod::Preconditions not defined");
-    return true; //Note: Preconditions should always use the Preconditions htnWorldState parameter, rather than the constructor m_htnWorldState parameter.
+    return true; //Note: Preconditions should always use the Preconditions iHTNWorldState parameter, rather than the constructor m_iHTNWorldState parameter.
 }
 
 void HTNMethod::AddTask(HTNPrimitive* htnPrimitive)
@@ -69,11 +71,11 @@ void HTNMethod::AddTask(HTNCompound* htnCompound)
     m_nodeList.push_back(HTNCompoundPtr(htnCompound));
 }
 
-HTNNodeList& HTNMethod::GetTasks(HTNWorldState const& htnWorldState)
+HTNNodeList& HTNMethod::GetTasks(IHTNWorldState const& iHTNWorldState)
 {
     if (!m_alreadyCreatedTasks)
     {
-        CreateTasks(htnWorldState);
+        CreateTasks(iHTNWorldState);
         m_alreadyCreatedTasks = true;
     }
     return m_nodeList;
@@ -99,13 +101,13 @@ void PrintHTNPlanStack(std::deque<HTNPrimitivePtr> htnPlanStack)
     pLog(ss);
 }
 
-void PrintWorldStateStack(std::stack<HTNWorldState*> worldStateStack)
+void PrintWorldStateStack(std::stack<IHTNWorldState*> worldStateStack)
 {
     std::stringstream ss;
     ss << "WorldStateStack size = " << worldStateStack.size();
     pLog(ss);
     pLog("WorldStateStack: ");
-    for (std::stack<HTNWorldState*> dump = worldStateStack; !dump.empty(); dump.pop())
+    for (std::stack<IHTNWorldState*> dump = worldStateStack; !dump.empty(); dump.pop())
         worldStateStack.top()->Print();
 }
 
@@ -129,7 +131,7 @@ void PrintDecompositions(std::stack< DecompositionFrame > decompositions)
     pLog(ss);
 }
 
-HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot, int searchDepth)
+HTNPrimitiveList HTNIterative(IHTNWorldState &iHTNWorldState, HTNCompound &htnRoot, int searchDepth)
 {
     std::stringstream ss;
     ss << "Entering HTNIterative, root node = " + htnRoot.ToString() + ", containing methods:\n";
@@ -144,11 +146,11 @@ HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot
     pLog(ss);
     
     std::deque<HTNPrimitivePtr> htnPlanStack;
-    std::stack<HTNWorldState*> worldStateStack;
+    std::stack<IHTNWorldState*> worldStateStack;
     std::stack< StackNodePtr > nodeStack;
     std::stack< DecompositionFrame > decompositions; // std::stack< stackCounter, worldStateCounter>
     
-    worldStateStack.push(&htnWorldState);
+    worldStateStack.push(&iHTNWorldState);
     nodeStack.push( MakeSharedStackNodePtr(MakeShareableCompound(htnRoot), false) );
     bool lastTaskPrecon = true;
     
@@ -204,7 +206,7 @@ HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot
                     if (lastTaskPrecon)
                     {
                         pLog("lastTaskPrecon == true");
-                        worldStateStack.push(new HTNWorldState(*worldStateStack.top()));
+                        worldStateStack.push(worldStateStack.top()->clone());
                         htnPrimitive->Effect(*worldStateStack.top()); // simulate the effect of this primitive on the current worldState.
                         htnPlanStack.push_back(htnPrimitive);
                     }
@@ -269,8 +271,8 @@ HTNPrimitiveList HTNIterative(HTNWorldState &htnWorldState, HTNCompound &htnRoot
     
     if (worldStateStack.size() > 0)
     {
-        //copy the planned htnWorldState back into the parameter htnWorldState
-        htnWorldState = (*worldStateStack.top());
+        //copy the planned iHTNWorldState back into the parameter iHTNWorldState
+        iHTNWorldState = (*worldStateStack.top());
     }
     
     return htnPlanStack;
