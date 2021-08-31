@@ -1,6 +1,6 @@
 #pragma once
 
-class IHTNWorldState
+class HTN_PLANNER_API IHTNWorldState
 {
 public:
     IHTNWorldState() {}

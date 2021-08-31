@@ -2,86 +2,9 @@
 #include "pLog.h"
 #include <sstream>
 #include <stack>
-#include "Constants.h"
 #include "IHTNWorldState.h"
+#include "PlatformSpecificForPlanner.h"
 
-//*******************************************************************
-HTNNode::HTNNode(std::string name, HTNType htnType) : m_name(name), m_HTNType(htnType) {}
-
-std::string HTNNode::ToString()
-{
-    return m_name;
-}
-
-//*******************************************************************
-HTNPrimitive::HTNPrimitive(std::string name): HTNNode(name, HTNType::Primitive) {}
-
-bool HTNPrimitive::Preconditions(IHTNWorldState const& iHTNWorldState)
-{
-    ThrowException("HTNPrimitive::Preconditions not defined");
-    return true;
-}
-
-void HTNPrimitive::Effect(IHTNWorldState &iHTNWorldState)
-{
-    ThrowException("HTNPrimitive::Effect not defined");
-    return;
-}
-
-std::shared_ptr<BaseAction> HTNPrimitive::Operate(UPlayerData* playerData)
-{
-    ThrowException("HTNPrimitive::Operate not defined");
-    return std::make_shared<BaseAction>(EActions::noAction);
-}
-
-//*******************************************************************
-HTNCompound::HTNCompound(std::string name): HTNNode(name, HTNType::Compound), m_alreadyCreatedMethods(false) {}
-
-void HTNCompound::AddMethod(HTNMethod* htnMethod)
-{
-    m_methods.push_back(HTNMethodPtr(htnMethod));
-}
-
-HTNMethodList& HTNCompound::GetMethods(IHTNWorldState const& iHTNWorldState)
-{
-    if (!m_alreadyCreatedMethods)
-    {
-        CreateMethods(iHTNWorldState);
-        m_alreadyCreatedMethods = true;
-    }
-    return m_methods;
-}
-
-//*******************************************************************
-HTNMethod::HTNMethod(std::string name): HTNNode(name, HTNType::Method), m_alreadyCreatedTasks(false) {}
-
-bool HTNMethod::Preconditions(IHTNWorldState const& iHTNWorldState)
-{
-    ThrowException("HTNMethod::Preconditions not defined");
-    return true; //Note: Preconditions should always use the Preconditions iHTNWorldState parameter, rather than the constructor m_iHTNWorldState parameter.
-}
-
-void HTNMethod::AddTask(HTNPrimitive* htnPrimitive)
-{
-    m_nodeList.push_back(HTNPrimitivePtr(htnPrimitive));
-}
-
-void HTNMethod::AddTask(HTNCompound* htnCompound)
-{
-    m_nodeList.push_back(HTNCompoundPtr(htnCompound));
-}
-
-HTNNodeList& HTNMethod::GetTasks(IHTNWorldState const& iHTNWorldState)
-{
-    if (!m_alreadyCreatedTasks)
-    {
-        CreateTasks(iHTNWorldState);
-        m_alreadyCreatedTasks = true;
-    }
-    return m_nodeList;
-}
-
-//*******************************************************************
 constexpr int c_MaxSearchDepth = 50;
 
 struct DecompositionFrame
@@ -129,6 +52,11 @@ void PrintDecompositions(std::stack< DecompositionFrame > decompositions)
         ss <<  "(" << dump.top().m_stackCounter << ":" << dump.top().m_worldStateStackCounter << "), ";
     ss << "]";
     pLog(ss);
+}
+
+StackNodePtr MakeSharedStackNodePtr(HTNNodePtr htnNodePtr, bool isOr)
+{
+    return std::make_shared<StackNode>(htnNodePtr, isOr);
 }
 
 HTNPrimitiveList HTNIterative(IHTNWorldState &iHTNWorldState, HTNCompound &htnRoot, int searchDepth)
