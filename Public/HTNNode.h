@@ -40,7 +40,9 @@ public:
 class HTN_PLANNER_API HTNPrimitive : public HTNNode
 {
 public:
-    HTNPrimitive(std::string name);
+    const int m_type;  // Store an enum representing the corresponding Unreal Engine action. Can't have an enum type, as this htn_planner is compiled before Unreal, and so the enum is not accessible.
+    // In future, the actual Unreal enum file could be included from htn_planner. And, when compiling for terminal, an alternate enum file could be included.
+    HTNPrimitive(std::string name, int type);
     virtual bool Preconditions(IHTNWorldState const& iHTNWorldState); //must be true before this task can occur in the plan.
     virtual void Effect(IHTNWorldState & iHTNWorldState); //simplified, predicted effect of taking this action. Will be applied to the simulated world during planning.
     virtual ~HTNPrimitive() override = default;

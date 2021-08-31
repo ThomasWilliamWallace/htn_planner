@@ -20,7 +20,7 @@
 [[noreturn ]] void ThrowException(const std::string& errorMessage)
 {    
     FString fStringErrorMessage = FString(errorMessage.c_str());
-    UE_LOG(LogTemp, Fatal, TEXT("%s"), *fStringErrorMessage);
+    //UE_LOG(LogTemp, Fatal, TEXT("%s"), *fStringErrorMessage);
     //return;
 }
 

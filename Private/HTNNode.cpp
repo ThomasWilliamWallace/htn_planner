@@ -12,7 +12,7 @@ std::string HTNNode::ToString()
 }
 
 //*******************************************************************
-HTNPrimitive::HTNPrimitive(std::string name): HTNNode(name, HTNType::Primitive) {}
+HTNPrimitive::HTNPrimitive(std::string name, int type): HTNNode(name, HTNType::Primitive), m_type(type) {}
 
 bool HTNPrimitive::Preconditions(IHTNWorldState const& iHTNWorldState)
 {
